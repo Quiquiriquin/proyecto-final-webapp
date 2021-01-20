@@ -6,7 +6,7 @@
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <!-- JDBC Database connection settings postgres local -->
         <property name="connection.url">
-            jdbc:postgresql://ec2-23-23-88-216.compute-1.amazonaws.com:5432/d53g1u191loed8
+            jdbc:postgresql://ec2-23-23-88-216.compute-1.amazonaws.com:5432/d53g1u191loed8?sslmode=require
 <!--            jdbc:postgresql://localhost:5432/Proyecto-->
         </property>
         <property name="connection.username">cfdqqoktpianbj</property>
