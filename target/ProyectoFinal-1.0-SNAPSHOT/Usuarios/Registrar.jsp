@@ -69,6 +69,7 @@
                                         type="text"
                                         class="form-control"
                                         id="nombre"
+                                        name="nombre"
                                         aria-describedby="emailHelp"
                                         placeholder="Juan"
                                         >
@@ -81,6 +82,7 @@
                                     </label>
                                     <input
                                         type="text"
+                                        name="paterno"
                                         class="form-control"
                                         id="paterno"
                                         aria-describedby="emailHelp"
@@ -102,6 +104,7 @@
                                         type="text"
                                         class="form-control"
                                         id="estado"
+                                        name="estado"
                                         aria-describedby="emailHelp"
                                         placeholder=""
                                         >
@@ -116,6 +119,7 @@
                                         type="text"
                                         class="form-control"
                                         id="estado"
+                                        name="municipio"
                                         aria-describedby="emailHelp"
                                         placeholder=""
                                         >
@@ -133,6 +137,7 @@
                                 type="text"
                                 class="form-control"
                                 id="nombreUsuario"
+                                name="nombreUsuario"
                                 aria-describedby="emailHelp"
                                 placeholder="juan@gmail.com"
                                 >
@@ -149,6 +154,7 @@
                                 type="email"
                                 class="form-control"
                                 id="email"
+                                name="email"
                                 aria-describedby="emailHelp"
                                 placeholder="juan@gmail.com"
                                 >
@@ -162,6 +168,7 @@
                                 Contraseña
                             </label>
                             <input
+                                name="claveUsuario"
                                 type="password"
                                 class="form-control"
                                 id="claveUsuario"
