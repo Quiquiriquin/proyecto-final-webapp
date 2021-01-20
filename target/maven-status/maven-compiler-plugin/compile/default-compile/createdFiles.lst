@@ -1,0 +1,6 @@
+com/ipn/mx/modelo/dao/UsuarioDAO.class
+com/ipn/mx/modelo/dto/UsuarioDTO.class
+com/ipn/mx/modelo/entidades/Usuario.class
+com/ipn/mx/utilerias/LoginManager.class
+com/ipn/mx/controlador/web/UsuarioServlet.class
+com/ipn/mx/utilerias/HibernateUtil.class

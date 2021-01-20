@@ -1,0 +1,6 @@
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dto/UsuarioDTO.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/entidades/Usuario.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/UsuarioDAO.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/utilerias/LoginManager.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/controlador/web/UsuarioServlet.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/utilerias/HibernateUtil.java
