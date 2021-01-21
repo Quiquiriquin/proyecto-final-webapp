@@ -1,3 +1,4 @@
+C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dao\GraficaDAO.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dto\ticketApuestaDTO.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\utilerias\HibernateUtil.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\utilerias\LoginManager.java
@@ -5,10 +6,14 @@ C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-ma
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\controlador\web\UsuarioServlet.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dto\CategoriaDTO.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dto\ApuestaDTO.java
+C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dto\GraficaDTO.java
+C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dao\ticketApuestaDAO.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\entidades\Categoria.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\entidades\Usuario.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\entidades\ticketApuesta.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dao\ApuestaDAO.java
+C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\controlador\web\CategoriaServlet.java
+C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\controlador\web\ApuestaServlet.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dto\UsuarioDTO.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\dao\UsuarioDAO.java
 C:\Users\Adrian\Documents\NetBeansProjects\ProyectFinal\proyecto-final-webapp-master\src\main\java\com\ipn\mx\modelo\entidades\Apuesta.java

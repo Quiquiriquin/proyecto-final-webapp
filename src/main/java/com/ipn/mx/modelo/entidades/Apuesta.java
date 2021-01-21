@@ -5,6 +5,7 @@
  */
 package com.ipn.mx.modelo.entidades;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,4 +31,6 @@ public class Apuesta {
     private String nombreApuesta;
     private String descripcionApuesta;
     private int idCategoria;
+    private String status;
+    private Date fecha;
 }

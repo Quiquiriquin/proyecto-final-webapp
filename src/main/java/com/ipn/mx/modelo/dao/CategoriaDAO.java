@@ -136,20 +136,20 @@ public class CategoriaDAO {
         CategoriaDTO dto = new CategoriaDTO();
 
         //dto.getEntidad().setIdCategoria(4);
-        dto.getEntidad().setNombreCategoria("Futbol Español");
-        dto.getEntidad().setDescripcionCategoria("La liga");        
-        dto.getEntidad().setDescripcionCategoria("La liga");        
-        dto.getEntidad().setDescripcionCategoria("La liga");        
-        dto.getEntidad().setDescripcionCategoria("La liga");        
-        dao.create(dto);
+//        dto.getEntidad().setNombreCategoria("Futbol Español");
+//        dto.getEntidad().setDescripcionCategoria("La liga");        
+//        dto.getEntidad().setDescripcionCategoria("La liga");        
+//        dto.getEntidad().setDescripcionCategoria("La liga");        
+//        dto.getEntidad().setDescripcionCategoria("La liga");        
+//        dao.create(dto);
 //        dto.getEntidad().setIdCategoria(3);
 //        dto.getEntidad().setNombreCategoria("telefonos");
 //        dto.getEntidad().setDescripcionCategoria("dispositivo movil");        
 //        dao.update(dto);
 //        dto.getEntidad().setIdCategoria(3);      
 //        dao.delete(dto);
-//        dto.getEntidad().setIdCategoria(2);
-//        System.out.println(dao.read(dto));
+        dto.getEntidad().setIdCategoria(2);
+        System.out.println(dao.read(dto));
 //        System.out.println(dao.readAll());
         
         

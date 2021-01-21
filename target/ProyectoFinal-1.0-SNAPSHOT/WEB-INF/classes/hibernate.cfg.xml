@@ -29,6 +29,9 @@
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
-        <mapping class="com.ipn.mx.modelo.entidades.Usuario"/>       
+        <mapping class="com.ipn.mx.modelo.entidades.Usuario"/>
+        <mapping class="com.ipn.mx.modelo.entidades.Categoria"/> 
+        <mapping class="com.ipn.mx.modelo.entidades.Apuesta"/> 
+        <mapping class="com.ipn.mx.modelo.entidades.ticketApuesta"/>        
         </session-factory>
 </hibernate-configuration>
