@@ -31,4 +31,5 @@ public class ticketApuesta {
     private int idApuesta;
     private int idUsuario;
     private String ganador;
+    private String determinada;
 }

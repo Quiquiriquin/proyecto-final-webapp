@@ -31,7 +31,10 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/ProyectoFinal">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
                         </li>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
@@ -42,33 +45,28 @@
                     </ul>
                     <span class="navbar-text">
                         <ul class="navbar-nav mb-lg-0">
+                            <c:if test="${sessionScope.nombreUsuario != null}">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <c:out value="${sessionScope.nombreUsuario}"></c:out>
+                                        </a>
+                                        <ul class="dropdown-menu" style="left: -45px" aria-labelledby="navbarDropdownMenuLink">
+                                            <li><a class="dropdown-item" href="UsuarioServlet?action=perfil">Perfil</a></li>
+                                            <li><a class="dropdown-item" href="UsuarioServlet?action=logout">Cerrar sesión</a></li>
+                                        </ul>
+                                    </li>
+                            </c:if>
 
-                            <%
-                                if (session != null) { %> 
+                            <c:if test="${sessionScope.nombreUsuario == null}">
+                                <li>
+                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
+                                </li>
+                            </c:if>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <c:out value="${sessionScope.nombreUsuario}"></c:out>
-                                </a>
-                                <ul class="dropdown-menu" style="left: -45px" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
 
-                            <%
-                                } else {
-                            %>
-                            
-                                                        <li>
-                                <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
-                            </li>
-                            
-                            <% } %>
                         </ul>
                     </span>
                 </div>

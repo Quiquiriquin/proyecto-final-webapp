@@ -85,7 +85,6 @@ public class UsuarioDAO {
     public UsuarioDTO readByEmailPassword(UsuarioDTO dto) {
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = sesion.getTransaction();
-        UsuarioDTO usuario = new UsuarioDTO();
         try {
             String email = dto.getEntidad().getEmail();
             String claveUsuario = dto.getEntidad().getClaveUsuario();
@@ -94,14 +93,14 @@ public class UsuarioDAO {
             q.setParameter("email", email);
             q.setParameter("claveUsuario", claveUsuario);
             List list = q.list();
-            if (list.size() > 0) {
-                for (Usuario u : (List<Usuario>) q.list()) {
-                    usuario.setEntidad(u);
-                    usuario.toString();
-                }
-            }
             transaction.commit();
-            return usuario;
+            if (list.size() > 0) {
+                Usuario u = (Usuario) list.get(0);
+                dto.setEntidad(u);
+                return dto;
+            } else {
+                return null;
+            }
         } catch (HibernateException e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();

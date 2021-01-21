@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 21, 2021, 12:28:32 AM
+    Author     : enrique
+*/
+
+.apuesta-container {
+    background: #F7F7F7;
+    border:1px solid #E3E3E3;
+    border-radius: 5px;
+    padding: 25px 40px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.black-font {
+    color: #000000 !important;
+}
+
+.gray-font {
+    color: #8c8c8c !important;
+}
+
+.fecha-label {
+    color: #8c8c8c;
+    font-size: 12px;
+}
+
+.min-full {
+    min-height: calc(100vh - 90px);
+}
+
+.overflow-y {
+    overflow-y: auto;
+}

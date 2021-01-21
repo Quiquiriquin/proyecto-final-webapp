@@ -122,7 +122,6 @@ public class ApuestaDAO {
                 dto.setEntidad(u);
                 lista.add(dto);
             }
-
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null && transaction.isActive()) {

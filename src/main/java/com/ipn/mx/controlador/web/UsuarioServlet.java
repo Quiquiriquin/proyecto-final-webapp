@@ -47,11 +47,17 @@ public class UsuarioServlet extends HttpServlet {
             case "login":
                 iniciarSesion(request, response);
                 break;
+            case "logout":
+                cerrarSesion(request, response);
+                break;
             case "registrar":
                 registrarUsuario(request, response);
                 break;
             case "almacenar":
                 almacenarUsuario(request, response);
+                break;
+            case "perfil":
+                consultarUsuario(request, response);
                 break;
             default:
                 break;
@@ -118,16 +124,25 @@ public class UsuarioServlet extends HttpServlet {
     private void almacenarUsuario(HttpServletRequest request, HttpServletResponse response) {
         UsuarioDAO dao = new UsuarioDAO();
         UsuarioDTO dto = new UsuarioDTO();
+        String id = request.getParameter("idUsuario");
         dto.getEntidad().setNombre(request.getParameter("nombre"));
         dto.getEntidad().setPaterno(request.getParameter("paterno"));
         dto.getEntidad().setEmail(request.getParameter("email"));
         dto.getEntidad().setClaveUsuario(request.getParameter("claveUsuario"));
         dto.getEntidad().setNombreUsuario(request.getParameter("nombreUsuario"));
         dto.getEntidad().setTipoUsuario(request.getParameter("JUGADOR"));
-
-        dao.create(dto);
         try {
-            response.sendRedirect("UsuarioServlet?action=ingresar");
+            RequestDispatcher rd = request.getRequestDispatcher("Usuarios/Perfil.jsp");
+            System.out.println(id);
+            if (id != null) {
+                dto.getEntidad().setIdUsuario(Integer.parseInt(id));
+                dao.update(dto);
+                request.setAttribute("usuario", dto);
+                response.sendRedirect("UsuarioServlet?action=perfil");
+            } else {
+                dao.create(dto);
+                response.sendRedirect("UsuarioServlet?action=ingresar");
+            }
         } catch (IOException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -142,20 +157,48 @@ public class UsuarioServlet extends HttpServlet {
         dto.getEntidad().setClaveUsuario(request.getParameter("claveUsuario"));
         try {
             dto = dao.readByEmailPassword(dto);
-            System.out.println(dto.getEntidad().getIdUsuario());
             if (dto.getEntidad().getNombre() == null) {
                 response.sendRedirect("/ProyectoFinal/UsuarioServlet?action=ingresar");
             } else {
                 manager.login(request, response,
                         dto.getEntidad().getNombreUsuario(),
                         dto.getEntidad().getEmail(),
-                        dto.getEntidad().getTipoUsuario());
+                        dto.getEntidad().getTipoUsuario(), 
+                        dto.getEntidad().getIdUsuario());
                 response.sendRedirect("/ProyectoFinal");
             }
         } catch (IOException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private void consultarUsuario(HttpServletRequest request, HttpServletResponse response) {
+        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioDTO dto = new UsuarioDTO();
+        LoginManager manager = new LoginManager();
+        int id = manager.getSessionId(request, response);
+        dto.getEntidad().setIdUsuario(id);
+        RequestDispatcher rd = request.getRequestDispatcher("Usuarios/Perfil.jsp");
+        try {
+            dto = dao.read(dto);
+            request.setAttribute("usuario", dto);
+            System.out.println(dto.toString());
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void cerrarSesion(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            LoginManager manager = new LoginManager();
+            manager.logout(request, response);
+            response.sendRedirect("/ProyectoFinal");
+        } catch (IOException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

@@ -41,3 +41,11 @@ and open the template in the editor.
 .fz-14 {
     font-size: 0.875em;
 }
+
+.black-font {
+    color: #000000 !important;
+}
+
+.gray-font {
+    color: #8c8c8c !important;
+}
