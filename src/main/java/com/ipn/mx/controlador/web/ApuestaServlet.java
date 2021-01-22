@@ -8,9 +8,11 @@ package com.ipn.mx.controlador.web;
 import com.ipn.mx.modelo.dao.ApuestaDAO;
 import com.ipn.mx.modelo.dao.CategoriaDAO;
 import com.ipn.mx.modelo.dao.GraficaDAO;
+import com.ipn.mx.modelo.dao.ticketApuestaDAO;
 import com.ipn.mx.modelo.dto.ApuestaDTO;
 import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.dto.GraficaDTO;
+import com.ipn.mx.modelo.dto.ticketApuestaDTO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +37,7 @@ import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+
 /**
  *
  * @author Adrian
@@ -72,14 +75,30 @@ public class ApuestaServlet extends HttpServlet {
                         if (accion.equals("guardar")) {
                             almacenarApuesta(request, response);
                         } else {
-                            if (accion.equals("ver")) {
-                                mostrarApuesta(request, response);
+                            if (accion.equals("verAdmin")) {
+                                mostrarApuestaAdmin(request, response);
                             } else {
                                 if (accion.equals("graficar")) {
                                     graficar(request, response);
                                 } else {
                                     if (accion.equals("verPDF")) {
                                         verPDF(request, response);
+                                    } else {
+                                        if (accion.equals("ApostarAqui")) {
+                                            ApostarAqui(request, response);
+                                        } else {
+                                            if (accion.equals("verUsuario")) {
+                                                mostrarApuestaUsuario(request, response);
+                                            } else {
+                                                if (accion.equals("hacerApuesta")) {
+                                                    hacerApuesta(request, response);
+                                                } else {
+                                                    if (accion.equals("apostar")) {
+                                                        apostar(request, response);
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -146,7 +165,7 @@ public class ApuestaServlet extends HttpServlet {
         } catch (ServletException | IOException ex) {
             Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     private void nuevaApuesta(HttpServletRequest request, HttpServletResponse response) {
@@ -188,7 +207,7 @@ public class ApuestaServlet extends HttpServlet {
 
     }
 
-    private void almacenarApuesta(HttpServletRequest request, HttpServletResponse response){
+    private void almacenarApuesta(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Debug 1");
         ApuestaDAO dao = new ApuestaDAO();
         ApuestaDTO dto = new ApuestaDTO();
@@ -215,18 +234,32 @@ public class ApuestaServlet extends HttpServlet {
             dto.getEntidad().setStatus(request.getParameter("status"));
 //            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 //            dto.getEntidad().setFecha(formatter.parse(request.getParameter("fecha")));
-                
+
             dao.update(dto);
             listaDeApuesta(request, response);
         }
 
     }
 
-    private void mostrarApuesta(HttpServletRequest request, HttpServletResponse response) {
+    private void mostrarApuestaAdmin(HttpServletRequest request, HttpServletResponse response) {
         ApuestaDAO dao = new ApuestaDAO();
         ApuestaDTO dto = new ApuestaDTO();
         dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
-        RequestDispatcher rd = request.getRequestDispatcher("Apuestas/ver.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("Apuestas/verAdmin.jsp");
+        try {
+            dto = dao.read(dto);
+            request.setAttribute("cat", dto);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void mostrarApuestaUsuario(HttpServletRequest request, HttpServletResponse response) {
+        ApuestaDAO dao = new ApuestaDAO();
+        ApuestaDTO dto = new ApuestaDTO();
+        dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
+        RequestDispatcher rd = request.getRequestDispatcher("Apuestas/verUsuario.jsp");
         try {
             dto = dao.read(dto);
             request.setAttribute("cat", dto);
@@ -284,5 +317,50 @@ public class ApuestaServlet extends HttpServlet {
 //        }
     }
 
-}
+    private void ApostarAqui(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("prueba33");
+        ApuestaDAO dao = new ApuestaDAO();
 
+        try {
+            System.out.println("prueba233");
+            System.out.println(dao.readApuestAbierta());
+            System.out.println("prueba34");
+            List lista = dao.readApuestAbierta();
+            //System.out.println("prueba3");
+            request.setAttribute("listaDeApuestas", lista);
+            //System.out.println("prueba4");
+            RequestDispatcher vista = request.getRequestDispatcher("Apuestas/apuestaAqui.jsp");
+            vista.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void hacerApuesta(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("pruebaHacerApuesta");
+        ApuestaDAO dao = new ApuestaDAO();
+        ApuestaDTO dto = new ApuestaDTO();
+        dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
+        RequestDispatcher rd = request.getRequestDispatcher("Apuestas/hacerApuesta.jsp");
+        try {
+            dto = dao.read(dto);
+            request.setAttribute("ap", dto);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void apostar(HttpServletRequest request, HttpServletResponse response) {
+        ticketApuestaDTO dto = new ticketApuestaDTO();
+        ticketApuestaDAO dao = new ticketApuestaDAO();
+
+        dto.getEntidad().setMonto(Float.parseFloat(request.getParameter("monto")));
+        dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
+        dto.getEntidad().setIdApuesta(1);
+        dto.getEntidad().setGanador(request.getParameter("ganador"));
+        
+        dao.create(dto);
+    }
+
+}

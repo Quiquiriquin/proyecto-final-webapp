@@ -131,6 +131,27 @@ public class ApuestaDAO {
         }
         return lista;
     }
+    public List readApuestAbierta() {
+        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = sesion.getTransaction();
+        List lista = new ArrayList();
+        try {
+            transaction.begin();
+            Query q = sesion.createQuery("from Apuesta u where u.status='ABIERTA' order by u.idApuesta");
+            for (Apuesta u : (List<Apuesta>) q.list()) {
+                ApuestaDTO dto = new ApuestaDTO();
+                dto.setEntidad(u);
+                lista.add(dto);
+            }
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+        }
+        return lista;
+    }
 
     public static void main(String[] args) {
         ApuestaDAO dao = new ApuestaDAO();
@@ -151,7 +172,7 @@ public class ApuestaDAO {
 //        dao.delete(dto);
 //        dto.getEntidad().setIdCategoria(2);
 //        System.out.println(dao.read(dto));
-//        System.out.println(dao.readAll());
+            System.out.println(dao.readApuestAbierta());
         
         
         

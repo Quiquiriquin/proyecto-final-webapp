@@ -70,7 +70,7 @@
                         <tr>
                             <td>
                                 <a class="btn btn-primary btn-lg"
-                                   href="ApuestaServlet?accion=ver&idApuesta=<c:out value="${apuestas.entidad.idApuesta}"/>">
+                                   href="ApuestaServlet?accion=verAdmin&idApuesta=<c:out value="${apuestas.entidad.idApuesta}"/>">
                                     <c:out value="${apuestas.entidad.idApuesta}"/>
                                 </a>
                             </td>

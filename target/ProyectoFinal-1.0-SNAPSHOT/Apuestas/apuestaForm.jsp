@@ -102,34 +102,39 @@
                                             </c:forEach>
                                         </select>
                                     </c:if>
-                                    <c:if test="${dto.entidad.idCategoria != null}">
-                                        <label class="form-label mini">
-                                            Categoría- Actualizar
-                                        </label>
-                                        <input disabled
-                                            
+                                    <c:if test="${dto.entidad.idCategoria != null}">                                        
+                                        <input 
+                                            type="hidden"                                            
                                             class="form-select"
                                             id="idCategoria"
                                             name="idCategoria"
                                             placeholder="Selecciona..."
                                             value="<c:out value="${dto.entidad.idCategoria}" />"
                                             >
-                                            
+
                                     </c:if>
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label mini">
                                         Status Apuesta
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
-                                        id="status" 
+                                    <select
+                                        class="form-select"
+                                        id="status"
                                         name="status"
-                                        placeholder="Doe"
-                                        required
+                                        placeholder="Selecciona Status..."                                        
+                                        aria-label="Default select example"
                                         value="<c:out value="${dto.entidad.status}" />"
-                                        >
+                                        >                                        
+                                        <option                                                
+                                            value="<c:out value="${dto.entidad.status}" />">
+                                            Abierto
+                                        </option>
+                                        <option                                                
+                                            value="<c:out value="${dto.entidad.status}" />">
+                                            Cerrado
+                                        </option>
+                                    </select>
                                 </div>                  
                                 <div class="mt-3">
                                     <button type="submit" class="login-btn">
