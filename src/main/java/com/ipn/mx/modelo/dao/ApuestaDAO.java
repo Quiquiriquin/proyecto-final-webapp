@@ -141,9 +141,11 @@ public class ApuestaDAO {
 //        dto.getEntidad().setDescripcionApuesta("Supercopa Final");        
 //        dto.getEntidad().setIdCategoria(1);        
 //        dao.create(dto);
-//        dto.getEntidad().setIdCategoria(3);
-//        dto.getEntidad().setNombreCategoria("telefonos");
-//        dto.getEntidad().setDescripcionCategoria("dispositivo movil");        
+//        dto.getEntidad().setIdApuesta(5);
+//        dto.getEntidad().setNombreApuesta("Torneo de FORTNITE");
+//        dto.getEntidad().setDescripcionApuesta("Yeadasdh"); 
+//        dto.getEntidad().setIdCategoria(1);
+//        dto.getEntidad().setStatus("Cerrado");
 //        dao.update(dto);
 //        dto.getEntidad().setIdCategoria(3);      
 //        dao.delete(dto);

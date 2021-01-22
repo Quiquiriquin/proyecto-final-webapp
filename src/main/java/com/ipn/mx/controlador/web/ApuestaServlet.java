@@ -207,11 +207,11 @@ public class ApuestaServlet extends HttpServlet {
             listaDeApuesta(request, response);
 
         } else {
-            System.out.println("Debug 3");
+            System.out.println("Debug 3.1");
             dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
             dto.getEntidad().setNombreApuesta(request.getParameter("nombreApuesta"));
             dto.getEntidad().setDescripcionApuesta(request.getParameter("descripcionApuesta"));
-//            dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
+            dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
             dto.getEntidad().setStatus(request.getParameter("status"));
 //            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 //            dto.getEntidad().setFecha(formatter.parse(request.getParameter("fecha")));

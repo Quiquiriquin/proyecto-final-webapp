@@ -104,19 +104,17 @@
                                     </c:if>
                                     <c:if test="${dto.entidad.idCategoria != null}">
                                         <label class="form-label mini">
-                                            Categoria
+                                            Categoría- Actualizar
                                         </label>
-                                        <fieldset disabled class="col-md-10">
-                                            <input 
-                                                type="text" 
-                                                class="form-control" 
-                                                id="idCategoria" 
-                                                name="idCategoria"
-                                                placeholder="Doe"
-                                                required
-                                                value="<c:out value="${dto.entidad.idCategoria}" />"
-                                                >
-                                        </fieldset> 
+                                        <input disabled
+                                            
+                                            class="form-select"
+                                            id="idCategoria"
+                                            name="idCategoria"
+                                            placeholder="Selecciona..."
+                                            value="<c:out value="${dto.entidad.idCategoria}" />"
+                                            >
+                                            
                                     </c:if>
                                 </div>
                                 <div class="mb-2">
