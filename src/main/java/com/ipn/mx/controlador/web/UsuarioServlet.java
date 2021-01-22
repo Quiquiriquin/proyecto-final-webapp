@@ -5,11 +5,14 @@
  */
 package com.ipn.mx.controlador.web;
 
+import com.ipn.mx.modelo.dao.CategoriaDAO;
 import com.ipn.mx.modelo.dao.UsuarioDAO;
+import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.dto.UsuarioDTO;
 import com.ipn.mx.utilerias.LoginManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -58,6 +61,18 @@ public class UsuarioServlet extends HttpServlet {
                 break;
             case "perfil":
                 consultarUsuario(request, response);
+                break;
+            case "actualizar":
+                actualizarUsuario(request, response);
+                break;
+            case "ver":
+                mostrarUsuario(request, response);
+                break;
+            case "eliminar":
+                eliminarUsuario(request, response);
+                break;
+            case "listaDeUsuarios":
+                listaDeUsuario(request, response);
                 break;
             default:
                 break;
@@ -198,6 +213,52 @@ public class UsuarioServlet extends HttpServlet {
             response.sendRedirect("/ProyectoFinal");
         } catch (IOException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void actualizarUsuario(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void mostrarUsuario(HttpServletRequest request, HttpServletResponse response) {
+        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.getEntidad().setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
+        RequestDispatcher rd = request.getRequestDispatcher("Usuarios/ver.jsp");
+        try {
+            dto = dao.read(dto);
+            request.setAttribute("cat", dto);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void eliminarUsuario(HttpServletRequest request, HttpServletResponse response) {
+        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.getEntidad().setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
+
+        dao.delete(dto);
+        listaDeUsuario(request, response);
+    }
+
+    private void listaDeUsuario(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("prueba33");
+        UsuarioDAO dao = new UsuarioDAO();
+
+        try {
+            System.out.println("prueba233");
+            System.out.println(dao.readAll());
+            System.out.println("prueba341");
+            List lista = dao.readAll();
+            System.out.println("prueba35");
+            request.setAttribute("listaDeUsuarios", lista);
+            //System.out.println("prueba4");
+            RequestDispatcher vista = request.getRequestDispatcher("Usuarios/listaUsuarios.jsp");
+            vista.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

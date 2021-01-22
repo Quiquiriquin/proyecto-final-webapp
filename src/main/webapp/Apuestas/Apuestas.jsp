@@ -129,7 +129,7 @@
             const test = (evento, fecha, idApuesta) => {
                 console.log(evento, fecha, idApuesta);
             }
-            </script>
+        </script>
             
     </body>
 </html>
