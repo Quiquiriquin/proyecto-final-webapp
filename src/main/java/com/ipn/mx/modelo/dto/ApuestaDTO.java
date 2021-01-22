@@ -39,6 +39,8 @@ public class ApuestaDTO implements Serializable {
         sb.append("descripcionApuesta: ").append(getEntidad().getDescripcionApuesta()).append("\n");
         sb.append("idCategoria: ").append(getEntidad().getIdCategoria()).append("\n");
         sb.append("status: ").append(getEntidad().getStatus()).append("\n");
+        sb.append("Equipo1: ").append(getEntidad().getEquipo1()).append("\n");
+        sb.append("Equipo2: ").append(getEntidad().getEquipo2()).append("\n");
        
         return sb.toString();
     }

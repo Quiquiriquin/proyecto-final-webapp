@@ -33,4 +33,6 @@ public class Apuesta {
     private int idCategoria;
     private String status;
     private Date fecha;
+    private String Equipo1;
+    private String Equipo2;
 }

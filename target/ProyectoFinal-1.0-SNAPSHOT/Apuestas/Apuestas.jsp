@@ -6,6 +6,7 @@
 
 <%@page import="com.ipn.mx.modelo.dto.UsuarioDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE html>
@@ -86,7 +87,7 @@
                 <div class="col-lg-9 col-sm-12 pe-3">
                     <div class="row gx-4">
                         <c:forEach var="apuesta" items="${apuestas}">
-                            <div class="col-lg-6 col-md-12 mt-3">
+                            <div class="col-lg-6 col-md-12 mt-3" onClick="goToApostar(${apuesta.getEntidad().getIdApuesta()})">
                                 <div class="apuesta-container" onclick="test('${apuesta.getEntidad().getNombreApuesta()}', '${apuesta.getEntidad().getFecha()}', '${apuesta.getEntidad().getIdApuesta()}')">
                                     <div>
                                         <div class="">
@@ -101,6 +102,7 @@
                                             Fecha
                                         </div>
                                         <div class="">
+                                            
                                             <c:out value="${apuesta.getEntidad().getFecha()}"></c:out>
                                         </div>
                                     </div>
@@ -126,10 +128,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             
+            goToApostar = (id) => {
+                window.location.replace(`/ProyectoFinal/ApuestaServlet?action=hacerApuesta&idApuesta=` + id);
+            };
             const test = (evento, fecha, idApuesta) => {
                 console.log(evento, fecha, idApuesta);
             }
-            </script>
+        </script>
             
     </body>
 </html>

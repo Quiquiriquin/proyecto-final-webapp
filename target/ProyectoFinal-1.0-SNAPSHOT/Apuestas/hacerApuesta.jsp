@@ -9,27 +9,84 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hacer Apuesta</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+        <title>Bet.io | Apostar</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./assets/Styles.css" rel="stylesheet">
+        <link href="./assets/Apuestas.css" rel="stylesheet">
+        <link href="./assets/Login.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg custom-navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Bet.io</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/ProyectoFinal">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                        </li>
+                        <!--                        <li class="nav-item">
+                                                    <a class="nav-link" href="#">Features</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Pricing</a>
+                                                </li>-->
+                    </ul>
+                    <span class="navbar-text">
+                        <ul class="navbar-nav mb-lg-0">
+                            <c:if test="${sessionScope.nombreUsuario != null}">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <c:out value="${sessionScope.nombreUsuario}"></c:out>
+                                        </a>
+                                        <ul class="dropdown-menu" style="left: -45px" aria-labelledby="navbarDropdownMenuLink">
+                                            <li><a class="dropdown-item" href="UsuarioServlet?action=perfil">Perfil</a></li>
+                                            <li><a class="dropdown-item" href="UsuarioServlet?action=logout">Cerrar sesión</a></li>
+                                        </ul>
+                                    </li>
+                            </c:if>
+
+                            <c:if test="${sessionScope.nombreUsuario == null}">
+                                <li>
+                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
+                                </li>
+                            </c:if>
+
+
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        </nav>
+
+
         <div class="container">
             <div class="mt-3">
-                <a href="ApuestaServlet?accion=ApostarAqui">
+                <a href="ApuestaServlet?action=lista">
                     <i class="fa fa-arrow-left"></i>
                     Regresar
                 </a>
             </div>
-            <div class="mt-3">
-                <h1>
-                    Ingresa Datos de Apuesta
-                </h1>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-5">
-                    <img src="./assets/Registrar.jpg" alt="apuesta" class="w-100" />
-                </div>
-                <div class="col-7">
+            <div class="row align-items-center justify-content-center">
+
+                <div class="col-6">
+                    <div class="mt-3">
+                        <h1>
+                            Apuesta
+                        </h1>
+                        <div class="mb-2">
+                            Establece el monto y el equipo ganador
+                        </div>
+                    </div>
                     <div class="card bg-light">
                         <div class="card-header" style="background: #216ed4;">
                             <div class="row">
@@ -37,27 +94,26 @@
                                     Datos de tu Apuesta
                                 </div>
                                 <div class="col-6 text-right">
-                                    <c:out value="${ap.entidad.idApuesta}" />
+                                    <c:out value="${apuesta.entidad.idApuesta}" />
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-
-
                             <form method="POST" action="ApuestaServlet?accion=apostar" >
-                                <input name="idApuesta" id="idApuesta" type="hidden" value="<c:out value="${ap.entidad.idApuesta}" />" />
+                                <input name="idApuesta" id="idApuesta" type="hidden" value="<c:out value="${apuesta.entidad.idApuesta}" />" />
                                 <div class="mb-2">
                                     <label class="form-label mini">
                                         Nombre de Apuesta
                                     </label>
                                     <input 
+                                        readonly
                                         type="text" 
                                         class="form-control" 
                                         id="nombreApuesta" 
                                         name="nombreApuesta"
                                         placeholder="Nombre nueva Apuesta"
                                         required
-                                        value="<c:out value="${ap.entidad.nombreApuesta}" />"
+                                        value="<c:out value="${apuesta.entidad.nombreApuesta}" />"
                                         >
                                 </div>
 
@@ -66,45 +122,46 @@
                                         Descripción de Apuesta
                                     </label>
                                     <input 
+                                        readonly
                                         type="text" 
                                         class="form-control" 
                                         id="descripcionApuesta" 
                                         name="descripcionApuesta"
                                         placeholder="Doe"
                                         required
-                                        value="<c:out value="${ap.entidad.descripcionApuesta}" />"
+                                        value="<c:out value="${apuesta.entidad.descripcionApuesta}" />"
                                         >
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label mini">
                                         Ganador de tu Apuesta
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
-                                        id="ganador" 
-                                        name="ganador"
-                                        placeholder="Doe"
-                                        required
-                                        value="<c:out value="${ap.entidad.descripcionApuesta}" />"
-                                        >
+                                    <select name="ganador" class="form-select">
+                                        <c:set var="equipos" value="${apuesta.entidad.equipo1},${apuesta.entidad.equipo2}" />
+                                        <c:forEach var="option" items="${equipos}">
+                                            <option value="${option}"><c:out value="${option}" /></option>
+                                        </c:forEach>
+                                    </select>                  
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label mini">
                                         Monto de Apuesta
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
-                                        id="montoApuesta" 
-                                        name="montoApuesta"
-                                        placeholder="Doe"
-                                        required
-                                        value="<c:out value="${ap.entidad.descripcionApuesta}" />"
-                                        >
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input 
+                                            prefix="$"
+                                            type="number" 
+                                            min="10"
+                                            class="form-control" 
+                                            id="montoApuesta" 
+                                            name="montoApuesta"
+                                            required
+                                            >
+                                    </div>
                                 </div>                                                  
                                 <div class="mt-3">
-                                    <button type="submit" class="login-btn">
+                                    <button type="submit" class="btn login-btn">
                                         Apostar
                                     </button>
                                 </div>

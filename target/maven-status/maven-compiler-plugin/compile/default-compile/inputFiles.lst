@@ -1,13 +1,16 @@
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/GraficaDAO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dto/ticketApuestaDTO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/entidades/Categoria.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/entidades/Apuesta.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/entidades/Usuario.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/entidades/ticketApuesta.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dto/ApuestaDTO.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dto/GraficaDTO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/controlador/web/UsuarioServlet.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/CategoriaDAO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/ticketApuestaDAO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/utilerias/HibernateUtil.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/controlador/web/CategoriaServlet.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/ApuestaDAO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dto/CategoriaDTO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dto/UsuarioDTO.java
