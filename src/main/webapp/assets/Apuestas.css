@@ -8,9 +8,32 @@ and open the template in the editor.
     Author     : enrique
 */
 
+.ticket-container {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-top: 25px;
+}
+
+.ticket-body {
+    padding: 5px 10px;
+}
+
+.ticket-header {
+    background: #FF0008;
+    color: #F7F7F7;
+    padding: 5px 10px 5px 10px;
+}
+
+.ticket-header.green {
+    background: #30ad6e;
+    color: #F7F7F7;
+    padding: 5px 10px 5px 10px;
+}
+
 .apuesta-container {
     background: #F7F7F7;
-    border:1px solid #E3E3E3;
+    border: 1px solid #E3E3E3;
     border-radius: 5px;
     padding: 25px 40px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -37,4 +60,41 @@ and open the template in the editor.
 
 .overflow-y {
     overflow-y: auto;
+}
+
+div.apuesta-container:hover {
+    cursor: pointer;
+}
+
+.bg-gray {
+    background: #DDDDDD !important;
+}
+
+.cancel-gray-button {
+    background: #8c8c8c !important;
+}
+
+.ticket-label-name {
+    font-size: 14px;
+    color: #8c8c8c;
+}
+
+.cerrar-btn {
+    border-radius: 5px;
+    background: #FF0008;
+    color: #fffFFF;
+    width: 100%;
+    border-color: #FF0008;
+    height: 28px !important;
+    padding: 1px 0 5px 0;
+}
+
+.cerrar-btn:hover {
+    color: #fffFFF;
+}
+
+.cerrar-btn.disabled {
+    background: #DDDDDD;
+    color: #000000;
+        border-color: #DDDDDD;
 }

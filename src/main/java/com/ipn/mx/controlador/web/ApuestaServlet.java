@@ -13,12 +13,15 @@ import com.ipn.mx.modelo.dto.ApuestaDTO;
 import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.dto.GraficaDTO;
 import com.ipn.mx.modelo.dto.ticketApuestaDTO;
+import com.ipn.mx.modelo.entidades.Apuesta;
+import com.ipn.mx.utilerias.LoginManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -343,25 +346,39 @@ public class ApuestaServlet extends HttpServlet {
     }
 
     private void apostar(HttpServletRequest request, HttpServletResponse response) {
-        ticketApuestaDTO dto = new ticketApuestaDTO();
-        ticketApuestaDAO dao = new ticketApuestaDAO();
-
-        dto.getEntidad().setMonto(Float.parseFloat(request.getParameter("monto")));
-        dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
-        dto.getEntidad().setIdApuesta(1);
-        dto.getEntidad().setGanador(request.getParameter("ganador"));
-
-        dao.create(dto);
+        try {
+            ticketApuestaDTO dto = new ticketApuestaDTO();
+            ticketApuestaDAO dao = new ticketApuestaDAO();
+                    LoginManager manager = new LoginManager();
+            int idUser = manager.getSessionId(request, response);
+            dto.getEntidad().setMonto(Float.parseFloat(request.getParameter("montoApuesta")));
+            dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
+            dto.getEntidad().setGanador(request.getParameter("ganador"));
+            dto.getEntidad().setDeterminada("PENDIENTE");
+            dto.getEntidad().setIdUsuario(idUser);
+            dao.create(dto);
+            response.sendRedirect("/ProyectoFinal/ApuestaServlet?action=lista");
+        } catch (IOException ex) {
+            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void listarApuestas(HttpServletRequest request, HttpServletResponse response) {
         ApuestaDAO dao = new ApuestaDAO();
         ApuestaDTO dto = new ApuestaDTO();
+        ticketApuestaDAO tdao = new ticketApuestaDAO();
+        LoginManager manager = new LoginManager();
+        int idUser = manager.getSessionId(request, response);
+        List lista2 = new ArrayList();
+        List nombreEvento = new ArrayList();
         RequestDispatcher rd = request.getRequestDispatcher("Apuestas/Apuestas.jsp");
         try {
             List list = dao.readAll();
+            lista2 = tdao.readAllUser(idUser);
+            System.out.println(lista2);
             request.setAttribute("apuestas", list);
             request.setAttribute("apuesta", null);
+            request.setAttribute("apuestasUsuario", lista2);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);

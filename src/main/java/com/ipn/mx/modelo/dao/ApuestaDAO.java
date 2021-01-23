@@ -98,6 +98,8 @@ public class ApuestaDAO {
         }
         return lista;
     }
+    
+    
     public List readApuestAbierta() {
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = sesion.getTransaction();

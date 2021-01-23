@@ -11,12 +11,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bet.io | Apostar</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="./assets/Styles.css" rel="stylesheet">
-        <link href="./assets/Apuestas.css" rel="stylesheet">
-        <link href="./assets/Login.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <link href="./assets/Styles.css" rel="stylesheet">
+        <link href="./assets/Login.css" rel="stylesheet">
+        <link href="./assets/Apuestas.css" rel="stylesheet">
     </head>
     <body>
+
+        <style>
+            .login-card {
+                max-width: 35%;
+                margin: 25px auto 0 auto;
+                border:1px solid #E3E3E3;
+                border-radius: 5px;
+                padding: 25px 40px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            }
+
+            .login-title {
+                font-size: 2em;
+                font-weight: 500;
+            }
+
+            .cancel-gray-button {
+                background: #DDDDDD !important;
+            }
+        </style>
+
+
         <nav class="navbar navbar-expand-lg custom-navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Bet.io</a>
@@ -87,19 +109,19 @@
                             Establece el monto y el equipo ganador
                         </div>
                     </div>
-                    <div class="card bg-light">
-                        <div class="card-header" style="background: #216ed4;">
-                            <div class="row">
+                    <div class="card ">
+                        <div class="card-header" style="background: #DDDDDD;">
+                            <div class="row" >
                                 <div class="col-6">
                                     Datos de tu Apuesta
                                 </div>
-                                <div class="col-6 text-right">
-                                    <c:out value="${apuesta.entidad.idApuesta}" />
+                                <div class="col-6 text-end">
+                                    ID de partido: <c:out value="${apuesta.entidad.idApuesta}" />
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="ApuestaServlet?accion=apostar" >
+                            <form method="POST" action="ApuestaServlet?action=apostar" >
                                 <input name="idApuesta" id="idApuesta" type="hidden" value="<c:out value="${apuesta.entidad.idApuesta}" />" />
                                 <div class="mb-2">
                                     <label class="form-label mini">
@@ -151,7 +173,7 @@
                                         <span class="input-group-text">$</span>
                                         <input 
                                             prefix="$"
-                                            type="number" 
+                                            type="text" 
                                             min="10"
                                             class="form-control" 
                                             id="montoApuesta" 
@@ -160,10 +182,19 @@
                                             >
                                     </div>
                                 </div>                                                  
-                                <div class="mt-3">
-                                    <button type="submit" class="btn login-btn">
-                                        Apostar
-                                    </button>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <a href="ApuestaServlet?action=lista">
+                                            <button type="button" class="btn cancel-gray-button">
+                                                Cancelar
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <button type="submit" class="btn accept-button">
+                                            Apostar
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

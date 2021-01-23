@@ -5,6 +5,7 @@
  */
 package com.ipn.mx.modelo.entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 /**
  *
@@ -24,9 +26,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="Apuesta", schema="public")
-public class Apuesta {
+public class Apuesta implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NaturalId
     private int idApuesta;
     private String nombreApuesta;
     private String descripcionApuesta;
@@ -35,4 +37,6 @@ public class Apuesta {
     private Date fecha;
     private String Equipo1;
     private String Equipo2;
+    private String ganador;
+    private Float momio;
 }

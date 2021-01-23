@@ -49,3 +49,11 @@ and open the template in the editor.
 .gray-font {
     color: #8c8c8c !important;
 }
+
+.cancel-gray-button {
+    background: #8c8c8c !important;
+}
+
+.hover-cursor:hover {
+    cursor: pointer !important;
+}
