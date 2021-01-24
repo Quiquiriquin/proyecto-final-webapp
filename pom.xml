@@ -71,6 +71,11 @@
             <version>5.4.25.Final</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>be.ceau</groupId>
+            <artifactId>chart</artifactId>
+            <version>2.6.0</version>
+        </dependency>
     </dependencies>
 
     <build>

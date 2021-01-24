@@ -14,6 +14,7 @@ import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.dto.GraficaDTO;
 import com.ipn.mx.modelo.dto.ticketApuestaDTO;
 import com.ipn.mx.modelo.entidades.Apuesta;
+import com.ipn.mx.utilerias.HibernateUtil;
 import com.ipn.mx.utilerias.LoginManager;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +34,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperRunManager;
 //import net.sf.jasperreports.engine.JRException;
 //import net.sf.jasperreports.engine.JasperRunManager;
 import org.jfree.chart.ChartFactory;
@@ -265,51 +268,53 @@ public class ApuestaServlet extends HttpServlet {
     }
 
     private void graficar(HttpServletRequest request, HttpServletResponse response) {
-        JFreeChart grafica = ChartFactory.createPieChart3D("productos por Categoria",
-                getGraficaProductos(), true, true, Locale.getDefault());
+        JFreeChart grafica = ChartFactory.createPieChart3D("Resumen categorias Apuestas",
+                getGraficaApuestas(), true, true, Locale.getDefault());
         //i10N o l10N
         String archivo = getServletConfig().getServletContext().getRealPath("/grafica.png");
         try {
             ChartUtils.saveChartAsPNG(new File(archivo), grafica, 500, 500);
-            RequestDispatcher rd = request.getRequestDispatcher("Grafica.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
-
+                    
         } catch (IOException | ServletException ex) {
-            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    } 
 
-    private PieDataset getGraficaProductos() {
+    private PieDataset getGraficaApuestas() {
         DefaultPieDataset pie3d = new DefaultPieDataset();
         GraficaDAO gDAO = new GraficaDAO();
         try {
-            List datos = gDAO.grafica();
+            List datos =gDAO.grafica();
             for (int i = 0; i < datos.size(); i++) {
                 GraficaDTO dto = (GraficaDTO) datos.get(i);
                 pie3d.setValue(dto.getNombre(), dto.getCantidad());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         return pie3d;
     }
 
     private void verPDF(HttpServletRequest request, HttpServletResponse response) {
-//        CategoriaDAO dao = new CategoriaDAO();
-//        CategoriaDTO dto = new CategoriaDTO();
-//        try {
-//            ServletOutputStream sos = response.getOutputStream();
-//            File reporte = new File(getServletConfig().getServletContext().getRealPath("/reportes/Grafica.jasper"));
-//            byte[] bytes = JasperRunManager.runReportToPdf(reporte.getPath(), null, dao.obtenerConexion());
-//            response.setContentType("application/pdf");
-//            response.setContentLength(bytes.length);
-//
-//            sos.write(bytes, 0, bytes.length);
-//            sos.flush();
-//            sos.close();
-//        } catch (IOException | JRException ex) {
-//            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        ApuestaDAO dao = new ApuestaDAO();
+//        ApuestaDTO dto = new ApuestaDTO();
+//        HibernateUtil conexion = new HibernateUtil();
+        try {
+            ServletOutputStream sos = response.getOutputStream();
+            File reporte = new File(getServletConfig().getServletContext().getRealPath("/Reportes/Apuestas.jasper"));
+            byte[] bytes = JasperRunManager.runReportToPdf(reporte.getPath(),null,dao.obtenerConexion());
+            response.setContentType("application/pdf");
+            response.setContentLength(bytes.length);
+
+            sos.write(bytes, 0, bytes.length);
+            sos.flush();
+            sos.close();
+        } catch (IOException | JRException ex) {
+            Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     private void ApostarAqui(HttpServletRequest request, HttpServletResponse response) {
@@ -384,5 +389,10 @@ public class ApuestaServlet extends HttpServlet {
             Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    
+//    public user getCurrentUser(String user_name, String password){
+//        
+//    }
+    
 }

@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GraficaDTO implements Serializable{
-    private String nombre;
     private int cantidad;
-    
+    private String nombre;
 }

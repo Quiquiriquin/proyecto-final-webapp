@@ -35,4 +35,6 @@ public class ticketApuesta implements Serializable{
     private int idUsuario;
     private String ganador;
     private String determinada;
+    private int idApuesta_idApuesta;
+    private int Apuesta_idApuesta;
 }

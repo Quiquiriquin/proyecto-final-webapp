@@ -28,7 +28,7 @@ import org.hibernate.annotations.NaturalId;
 @Table(name="Apuesta", schema="public")
 public class Apuesta implements Serializable{
     @Id
-    @NaturalId
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idApuesta;
     private String nombreApuesta;
     private String descripcionApuesta;

@@ -31,7 +31,7 @@ public class ApuestaDTO implements Serializable {
         this.entidad = entidad;
     }
     
-    @Override
+    /*@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("idApuesta: ").append(getEntidad().getIdApuesta()).append("\n");
@@ -43,5 +43,5 @@ public class ApuestaDTO implements Serializable {
         sb.append("Equipo2: ").append(getEntidad().getEquipo2()).append("\n");
        
         return sb.toString();
-    }
+    }*/
 }
