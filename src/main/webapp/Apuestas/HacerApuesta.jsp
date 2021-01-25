@@ -108,8 +108,6 @@
             
         </nav>
         
-
-
         <div class="container">
             <div class="mt-3">
                 <a href="ApuestaServlet?action=lista">
