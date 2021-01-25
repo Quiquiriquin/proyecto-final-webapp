@@ -18,6 +18,7 @@
         <link type="text/css" href="${pageContext.request.contextPath}/assets/Apuestas.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
+    
     <body>
 
         <nav class="navbar navbar-expand-lg custom-navbar">
