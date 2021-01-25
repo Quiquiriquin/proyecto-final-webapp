@@ -35,8 +35,8 @@ public class Apuesta implements Serializable{
     private int idCategoria;
     private String status;
     private Date fecha;
-    private String Equipo1;
-    private String Equipo2;
+    private String equipo1;
+    private String equipo2;
     private String ganador;
     private Float momio;
 }

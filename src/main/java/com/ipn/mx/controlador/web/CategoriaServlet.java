@@ -31,6 +31,7 @@ import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+
 /**
  *
  * @author Adrian
@@ -51,38 +52,34 @@ public class CategoriaServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String accion = request.getParameter("accion");
-
-        if (accion.equals("listaDeCategorias")) {
-            listaDeCategoria(request, response);
-        } else {
-            if (accion.equals("nuevo")) {
+        String action = request.getParameter("action");
+        switch (action) {
+            case "lista":
+                listaDeCategoria(request, response);
+                break;
+            case "nuevo":
                 nuevaCategoria(request, response);
-            } else {
-                if (accion.equals("eliminar")) {
-                    eliminarCategoria(request, response);
-                } else {
-                    if (accion.equals("actualizar")) {
-                        actualizarCategoria(request, response);
-                    } else {
-                        if (accion.equals("guardar")) {
-                            almacenarCategoria(request, response);
-                        } else {
-                            if (accion.equals("ver")) {
-                                mostrarCategoria(request, response);
-                            } else {
-                                if (accion.equals("graficar")) {
-                                    graficar(request, response);
-                                } else {
-                                    if (accion.equals("verPDF")) {
-                                        verPDF(request, response);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+                break;
+            case "eliminar":
+                eliminarCategoria(request, response);
+                break;
+            case "actualizar":
+                actualizarCategoria(request, response);
+                break;
+            case "guardar":
+                almacenarCategoria(request, response);
+                break;
+            case "graficar":
+                graficar(request, response);
+                break;
+            case "verPDF":
+                verPDF(request, response);
+                break;
+            case "ver":
+                mostrarCategoria(request, response);
+                break;
+            default:
+                break;
         }
     }
 
@@ -126,28 +123,21 @@ public class CategoriaServlet extends HttpServlet {
     }// </editor-fold>
 
     private void listaDeCategoria(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("prueba33");
         CategoriaDAO dao = new CategoriaDAO();
-
         try {
-            System.out.println("prueba233");
             System.out.println(dao.readAll());
-            System.out.println("prueba34");
             List lista = dao.readAll();
-            //System.out.println("prueba3");
             request.setAttribute("listaDeCategorias", lista);
-            //System.out.println("prueba4");
-            RequestDispatcher vista = request.getRequestDispatcher("Categorias/listaCategorias.jsp");
+            RequestDispatcher vista = request.getRequestDispatcher("Categorias/ListaCategorias.jsp");
             vista.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     private void nuevaCategoria(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("pruebanueva");
-        RequestDispatcher rd = request.getRequestDispatcher("Categorias/categoriaForm.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("Categorias/CategoriaForm.jsp");
         try {
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
@@ -172,7 +162,7 @@ public class CategoriaServlet extends HttpServlet {
         try {
             dto = dao.read(dto);
             request.setAttribute("dto", dto);
-            RequestDispatcher rd = request.getRequestDispatcher("Categorias/categoriaForm.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Categorias/CategoriaForm.jsp");
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -185,22 +175,29 @@ public class CategoriaServlet extends HttpServlet {
         CategoriaDAO dao = new CategoriaDAO();
         CategoriaDTO dto = new CategoriaDTO();
         if (request.getParameter("idCategoria") == null || request.getParameter("idCategoria").isEmpty()) {
-            System.out.println("Debug 2");
-//            dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("id")));
+            
             dto.getEntidad().setNombreCategoria(request.getParameter("nombreCategoria"));
             dto.getEntidad().setDescripcionCategoria(request.getParameter("descripcionCategoria"));
 
             dao.create(dto);
-            listaDeCategoria(request, response);
+            try {
+                response.sendRedirect("CategoriaServlet?action=lista");
+            } catch (IOException ex) {
+                Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } else {
             System.out.println("Debug 3");
             dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
             dto.getEntidad().setNombreCategoria(request.getParameter("nombreCategoria"));
             dto.getEntidad().setDescripcionCategoria(request.getParameter("descripcionCategoria"));
-                
+
             dao.update(dto);
-            listaDeCategoria(request, response);
+            try {
+                response.sendRedirect("CategoriaServlet?action=lista");
+            } catch (IOException ex) {
+                Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -209,7 +206,7 @@ public class CategoriaServlet extends HttpServlet {
         CategoriaDAO dao = new CategoriaDAO();
         CategoriaDTO dto = new CategoriaDTO();
         dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
-        RequestDispatcher rd = request.getRequestDispatcher("Categorias/ver.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("Categorias/Categoria.jsp");
         try {
             dto = dao.read(dto);
             request.setAttribute("cat", dto);

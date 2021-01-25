@@ -98,3 +98,7 @@ div.apuesta-container:hover {
     color: #000000;
         border-color: #DDDDDD;
 }
+
+.delete-link {
+    color: #FF0008;
+}

@@ -180,7 +180,7 @@ public class UsuarioServlet extends HttpServlet {
                         dto.getEntidad().getEmail(),
                         dto.getEntidad().getTipoUsuario(), 
                         dto.getEntidad().getIdUsuario());
-                response.sendRedirect("/ProyectoFinal");
+                response.sendRedirect("/ProyectoFinal/MainServlet?action=lista");
             }
         } catch (IOException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);

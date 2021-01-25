@@ -28,8 +28,25 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/ProyectoFinal">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
                         </li>
+                        <c:if test="${sessionScope.nombreUsuario != null}">
+
+                            <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="TicketsServlet?action=lista">Tickets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
+                                </li>
+                            </c:if>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
+                            </li>
+                        </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
                                                 </li>
@@ -41,7 +58,7 @@
                         <ul class="navbar-nav mb-lg-0">
                             <c:if test="${sessionScope.nombreUsuario != null}">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <c:out value="${sessionScope.nombreUsuario}"></c:out>
                                         </a>
                                         <ul class="dropdown-menu" style="left: -45px" aria-labelledby="navbarDropdownMenuLink">
@@ -59,8 +76,6 @@
                                     <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
                                 </li>
                             </c:if>
-
-
                         </ul>
                     </span>
                 </div>

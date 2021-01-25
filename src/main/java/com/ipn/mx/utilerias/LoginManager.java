@@ -48,6 +48,7 @@ public class LoginManager {
     public int getSessionId(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session == null) {
+            System.out.println("No hay sesión");
             return 0;
         } else {
             return (int) session.getAttribute(LOGIN_ID_SESSION_ATTRIBUTE);

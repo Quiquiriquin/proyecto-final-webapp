@@ -81,34 +81,6 @@ public class ticketApuestaDAO {
         return dto;
     }
 
-    /*public CategoriaDTO readByEmailPassword(CategoriaDTO dto) {
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction transaction = sesion.getTransaction();
-        CategoriaDTO usuario = new CategoriaDTO();
-        try {
-            String email = dto.getEntidad().getEmail();
-            String claveUsuario = dto.getEntidad().getClaveUsuario();
-            transaction.begin();
-            Query q = sesion.createQuery("from Usuario u where u.email=:email and claveUsuario=:claveUsuario");
-            q.setParameter("email", email);
-            q.setParameter("claveUsuario", claveUsuario);
-            List list = q.list();
-            if (list.size() > 0) {
-                for (Usuario u : (List<Usuario>) q.list()) {
-                    usuario.setEntidad(u);
-                    usuario.toString();
-                }
-            }
-            transaction.commit();
-            return usuario;
-        } catch (HibernateException e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-        }
-        return dto;
-    }
-    */
     public List readAll() {
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = sesion.getTransaction();
@@ -140,6 +112,7 @@ public class ticketApuestaDAO {
             Query q = sesion.createQuery("from ticketApuesta u where u.idUsuario=" + idUser + " order by u.idTicket");
             for (ticketApuesta u : (List<ticketApuesta>) q.list()) {
                 ticketApuestaDTO dto = new ticketApuestaDTO();
+                System.out.println(u);
                 dto.setEntidad(u);
                 lista.add(dto);
             }

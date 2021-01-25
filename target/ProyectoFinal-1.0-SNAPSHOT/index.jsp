@@ -21,6 +21,9 @@
         <%
             session = request.getSession(false);
             System.out.println(session.getAttribute("nombreUsuario"));
+            if (session.getAttribute("nombreUsuario") == null) {
+                response.sendRedirect("UsuarioServlet?action=ingresar");
+            }
         %>
         <nav class="navbar navbar-expand-lg custom-navbar">
             <div class="container-fluid">
@@ -33,12 +36,23 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
-                        </li>
+                        <c:if test="${sessionScope.nombreUsuario != null}">
+
+                            <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="TicketsServlet?action=lista">Tickets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
+                                </li>
+                            </c:if>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
+                            </li>
+                        </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
                                                 </li>
@@ -73,8 +87,62 @@
                 </div>
             </div>
         </nav>
-        <h1>Visualiza tus datos:</h1>
-        <img src="grafica.png"/>
+        <div class="container mt-4 mb-4">
+            <div class="row gx-3">
+                <div class="col-lg-6 col-sm-12">
+                    <h1>¡Bienvendido ${sessionScope.nombreUsuario}!</h1>
+                    <div class="">
+                        Visualiza las métricas generales sin entrar a cada sección.
+                    </div>
+                    <img class="mt-3" src="grafica.png"/>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-12 mt-3">
+                            <div class="rounded-container orange">
+                                <div class="box-title">
+                                    Total apostado por los usuarios
+                                </div>
+                                <div class="data-info text-end">
+                                    $<c:out value="${totalApostado}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mt-3">
+                            <div class="rounded-container green">
+                                <div class="box-title">
+                                    Apuestas ganadas
+                                </div>
+                                <div class="data-info text-end">
+                                    <c:out value="${ganadas}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mt-3">
+                            <div class="rounded-container red">
+                                <div class="box-title">
+                                    Apuestas perdidas
+                                </div>
+                                <div class="data-info text-end">
+                                    <c:out value="${perdidas}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <div class="rounded-container blue">
+                                <div class="box-title">
+                                    Total de usuarios
+                                </div>
+                                <div class="data-info text-end">
+                                    <c:out value="${usuariosTotales}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
