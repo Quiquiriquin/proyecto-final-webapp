@@ -54,4 +54,14 @@ public class LoginManager {
             return (int) session.getAttribute(LOGIN_ID_SESSION_ATTRIBUTE);
         }
     }
+
+    public String getEmail(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            System.out.println("No hay sesión");
+            return "";
+        } else {
+            return (String) session.getAttribute(LOGIN_EMAIL_SESSION_ATTRIBUTE);
+        }
+    }
 }

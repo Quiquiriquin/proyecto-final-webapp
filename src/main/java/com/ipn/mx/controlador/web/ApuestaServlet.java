@@ -14,6 +14,7 @@ import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.dto.GraficaDTO;
 import com.ipn.mx.modelo.dto.ticketApuestaDTO;
 import com.ipn.mx.modelo.entidades.Apuesta;
+import com.ipn.mx.utilerias.CorreoUtil;
 import com.ipn.mx.utilerias.HibernateUtil;
 import com.ipn.mx.utilerias.LoginManager;
 import java.io.File;
@@ -209,7 +210,7 @@ public class ApuestaServlet extends HttpServlet {
         ApuestaDTO dto = new ApuestaDTO();
         ticketApuestaDAO daoTicket = new ticketApuestaDAO();
         ticketApuestaDTO dtoTicket = new ticketApuestaDTO();
-        
+
         if (request.getParameter("idApuesta") == null || request.getParameter("idApuesta").isEmpty()) {
             dto.getEntidad().setNombreApuesta(request.getParameter("nombreApuesta"));
             dto.getEntidad().setDescripcionApuesta(request.getParameter("descripcionApuesta"));
@@ -219,6 +220,7 @@ public class ApuestaServlet extends HttpServlet {
             dto.getEntidad().setEquipo2(request.getParameter("equipo2"));
             dto.getEntidad().setMomio(Float.parseFloat(request.getParameter("momio")));
             dao.create(dto);
+
             try {
                 response.sendRedirect("ApuestaServlet?action=lista");
             } catch (IOException ex) {
@@ -236,16 +238,16 @@ public class ApuestaServlet extends HttpServlet {
             dto.getEntidad().setGanador(request.getParameter("ganador"));
             if (dto.getEntidad().getGanador() != null) {
                 List aux = daoTicket.readAllFromApuesta(dto.getEntidad().getIdApuesta());
-                for (int i = 0; i < aux.size(); i++ ) {
+                for (int i = 0; i < aux.size(); i++) {
                     dtoTicket = (ticketApuestaDTO) aux.get(i);
                     if (dtoTicket.getEntidad().getGanador().equals(dto.getEntidad().getGanador()) && dtoTicket.getEntidad().getDeterminada() != "CERRADA") {
-                      dtoTicket.getEntidad().setDeterminada("GANADA");  
+                        dtoTicket.getEntidad().setDeterminada("GANADA");
                     }
-                    if (!dtoTicket.getEntidad().getGanador().equals(dto.getEntidad().getGanador()) && dtoTicket.getEntidad().getDeterminada() != "CERRADA"){
-                       dtoTicket.getEntidad().setDeterminada("PERDIDA");   
+                    if (!dtoTicket.getEntidad().getGanador().equals(dto.getEntidad().getGanador()) && dtoTicket.getEntidad().getDeterminada() != "CERRADA") {
+                        dtoTicket.getEntidad().setDeterminada("PERDIDA");
                     }
                     daoTicket.update(dtoTicket);
-                    
+
                 }
             }
             dao.update(dto);
@@ -374,12 +376,15 @@ public class ApuestaServlet extends HttpServlet {
             ticketApuestaDTO dto = new ticketApuestaDTO();
             ticketApuestaDAO dao = new ticketApuestaDAO();
             LoginManager manager = new LoginManager();
+            CorreoUtil util = new CorreoUtil();
             int idUser = manager.getSessionId(request, response);
             dto.getEntidad().setMonto(Float.parseFloat(request.getParameter("montoApuesta")));
             dto.getEntidad().setIdApuesta(Integer.parseInt(request.getParameter("idApuesta")));
             dto.getEntidad().setGanador(request.getParameter("ganador"));
             dto.getEntidad().setDeterminada("PENDIENTE");
             dto.getEntidad().setIdUsuario(idUser);
+            String msg = "Tu apuesta con ID " + dto.getEntidad().getIdTicket()+ " ha sido registrada satisfactoriamente";
+            util.enviarCorreo(manager.getEmail(request, response), "Nueva apuesta realizada", msg);
             dao.create(dto);
             response.sendRedirect("/ProyectoFinal/ApuestaServlet?action=lista");
         } catch (IOException ex) {

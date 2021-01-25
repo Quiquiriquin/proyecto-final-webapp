@@ -9,6 +9,7 @@ import com.ipn.mx.modelo.dao.CategoriaDAO;
 import com.ipn.mx.modelo.dao.UsuarioDAO;
 import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.dto.UsuarioDTO;
+import com.ipn.mx.utilerias.CorreoUtil;
 import com.ipn.mx.utilerias.LoginManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -139,13 +140,14 @@ public class UsuarioServlet extends HttpServlet {
     private void almacenarUsuario(HttpServletRequest request, HttpServletResponse response) {
         UsuarioDAO dao = new UsuarioDAO();
         UsuarioDTO dto = new UsuarioDTO();
+        CorreoUtil util = new CorreoUtil();
         String id = request.getParameter("idUsuario");
         dto.getEntidad().setNombre(request.getParameter("nombre"));
         dto.getEntidad().setPaterno(request.getParameter("paterno"));
         dto.getEntidad().setEmail(request.getParameter("email"));
         dto.getEntidad().setClaveUsuario(request.getParameter("claveUsuario"));
         dto.getEntidad().setNombreUsuario(request.getParameter("nombreUsuario"));
-        dto.getEntidad().setTipoUsuario(request.getParameter("JUGADOR"));
+        dto.getEntidad().setTipoUsuario("JUGADOR");
         try {
             RequestDispatcher rd = request.getRequestDispatcher("Usuarios/Perfil.jsp");
             System.out.println(id);
@@ -156,6 +158,8 @@ public class UsuarioServlet extends HttpServlet {
                 response.sendRedirect("UsuarioServlet?action=perfil");
             } else {
                 dao.create(dto);
+                String msg = "Bienvenido " + dto.getEntidad().getNombreUsuario()+  "! Gracias por registrarte en Bet.io";
+                util.enviarCorreo(dto.getEntidad().getEmail(), "Bienvenido", msg);
                 response.sendRedirect("UsuarioServlet?action=ingresar");
             }
         } catch (IOException ex) {
@@ -172,7 +176,8 @@ public class UsuarioServlet extends HttpServlet {
         dto.getEntidad().setClaveUsuario(request.getParameter("claveUsuario"));
         try {
             dto = dao.readByEmailPassword(dto);
-            if (dto.getEntidad().getNombre() == null) {
+            System.out.println(dto);
+            if (dto == null) {
                 response.sendRedirect("/ProyectoFinal/UsuarioServlet?action=ingresar");
             } else {
                 manager.login(request, response,
