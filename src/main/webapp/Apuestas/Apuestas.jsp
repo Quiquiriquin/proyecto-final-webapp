@@ -81,10 +81,10 @@
 
                             <c:if test="${sessionScope.nombreUsuario == null}">
                                 <li>
-                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
+                                    <a class="nav-link" aria-current="page" href="UsuarioServlet?action=ingresar">Iniciar sesión</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
+                                    <a class="nav-link" aria-current="page" href="UsuarioServlet?action=registrar">Registrarme</a>
                                 </li>
                             </c:if>
                         </ul>
@@ -94,7 +94,7 @@
         </nav>
         <div class="container-fluid mt-3 min-full">
             <div class="mb-3">
-                <a href="/ProyectoFinal/MainServlet?action=lista"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
+                <a href="MainServlet?action=lista"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
             </div>
             <div class="row gx-4">
                 <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
@@ -238,9 +238,9 @@
 
                                                 if (tipo === 'ADMIN') {
                                                     console.log(tipo);
-                                                    window.location.replace(`/ProyectoFinal/ApuestaServlet?action=actualizar&idApuesta=` + id);
+                                                    window.location.replace(`ApuestaServlet?action=actualizar&idApuesta=` + id);
                                                 } else {
-                                                    window.location.replace(`/ProyectoFinal/ApuestaServlet?action=hacerApuesta&idApuesta=` + id);
+                                                    window.location.replace(`ApuestaServlet?action=hacerApuesta&idApuesta=` + id);
                                                 }
 
                                             };

@@ -140,7 +140,7 @@ public class MainServlet extends HttpServlet {
             ChartUtils.saveChartAsPNG(new File(archivo), grafica, 500, 500);
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 //            rd.forward(request, response);
-            response.sendRedirect("/ProyectoFinal/MainServlet?action=lista");
+            response.sendRedirect("MainServlet?action=lista");
         } catch (IOException ex) {
             Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

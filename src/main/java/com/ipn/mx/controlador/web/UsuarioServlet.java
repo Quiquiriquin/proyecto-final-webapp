@@ -178,14 +178,14 @@ public class UsuarioServlet extends HttpServlet {
             dto = dao.readByEmailPassword(dto);
             System.out.println(dto);
             if (dto == null) {
-                response.sendRedirect("/ProyectoFinal/UsuarioServlet?action=ingresar");
+                response.sendRedirect("UsuarioServlet?action=ingresar");
             } else {
                 manager.login(request, response,
                         dto.getEntidad().getNombreUsuario(),
                         dto.getEntidad().getEmail(),
                         dto.getEntidad().getTipoUsuario(), 
                         dto.getEntidad().getIdUsuario());
-                response.sendRedirect("/ProyectoFinal/MainServlet?action=lista");
+                response.sendRedirect("MainServlet?action=lista");
             }
         } catch (IOException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -246,7 +246,7 @@ public class UsuarioServlet extends HttpServlet {
 
         dao.delete(dto);
         try {
-            response.sendRedirect("/ProyectoFinal/UsuarioServlet?action=lista");
+            response.sendRedirect("UsuarioServlet?action=lista");
         } catch (IOException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -74,10 +74,10 @@
 
                             <c:if test="${sessionScope.nombreUsuario == null}">
                                 <li>
-                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
+                                    <a class="nav-link" aria-current="page" href="UsuarioServlet?action=ingresar">Iniciar sesión</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
+                                    <a class="nav-link" aria-current="page" href="UsuarioServlet?action=registrar">Registrarme</a>
                                 </li>
                             </c:if>
                         </ul>
@@ -87,7 +87,7 @@
         </nav>
         <div class="container mt-3">
             <div class="mb-3">
-                <a href="/ProyectoFinal/MainServlet?action=lista"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
+                <a href="MainServlet?action=lista"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
             </div>
             <div>
                 <div class="w-50 mx-auto">
