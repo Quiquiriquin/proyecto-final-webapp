@@ -364,6 +364,7 @@ public class ApuestaServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("Apuestas/HacerApuesta.jsp");
         try {
             dto = dao.read(dto);
+            
             request.setAttribute("apuesta", dto);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
