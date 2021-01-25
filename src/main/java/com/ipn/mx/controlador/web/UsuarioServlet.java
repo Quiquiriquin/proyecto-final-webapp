@@ -215,7 +215,7 @@ public class UsuarioServlet extends HttpServlet {
         try {
             LoginManager manager = new LoginManager();
             manager.logout(request, response);
-            response.sendRedirect("/ProyectoFinal");
+            response.sendRedirect("/");
         } catch (IOException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
