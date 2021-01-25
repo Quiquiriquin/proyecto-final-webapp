@@ -73,6 +73,7 @@
                             </c:if>
 
                             <c:if test="${sessionScope.nombreUsuario == null}">
+                                
                                 <li>
                                     <a class="nav-link" aria-current="page" href="UsuarioServlet?action=ingresar">Iniciar sesión</a>
                                 </li>
