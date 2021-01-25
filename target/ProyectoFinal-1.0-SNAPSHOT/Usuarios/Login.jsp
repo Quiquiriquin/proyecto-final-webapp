@@ -39,10 +39,10 @@
                     <span class="navbar-text">
                         <ul class="navbar-nav mb-lg-0">
                             <li>
-                                <a class="nav-link active" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
+                                <a class="nav-link active" aria-current="page" href="UsuarioServlet?action=ingresar">Iniciar sesión</a>
                             </li>
                             <li>
-                                <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
+                                <a class="nav-link" aria-current="page" href="UsuarioServlet?action=registrar">Registrarme</a>
                             </li>
 
                         </ul>
@@ -90,7 +90,7 @@
                             Ingresar
                         </button>
                         <div class="mt-4 fz-14 text-center">
-                            ¿Aún no tienes cuenta en Bet.io? <a href="/ProyectoFinal/UsuarioServlet?action=registrar">Regístrate aquí</a>
+                            ¿Aún no tienes cuenta en Bet.io? <a href="UsuarioServlet?action=registrar">Regístrate aquí</a>
                         </div>
                     </form>
                 </div>

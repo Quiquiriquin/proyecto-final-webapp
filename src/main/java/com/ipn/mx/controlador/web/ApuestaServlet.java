@@ -297,7 +297,7 @@ public class ApuestaServlet extends HttpServlet {
             ChartUtils.saveChartAsPNG(new File(archivo), grafica, 500, 500);
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 //            rd.forward(request, response);
-            response.sendRedirect("/ProyectoFinal/MainServlet?action=lista");
+            response.sendRedirect("MainServlet?action=lista");
         } catch (IOException ex) {
             Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -386,7 +386,7 @@ public class ApuestaServlet extends HttpServlet {
             String msg = "Tu apuesta con ID " + dto.getEntidad().getIdTicket()+ " ha sido registrada satisfactoriamente";
             util.enviarCorreo(manager.getEmail(request, response), "Nueva apuesta realizada", msg);
             dao.create(dto);
-            response.sendRedirect("/ProyectoFinal/ApuestaServlet?action=lista");
+            response.sendRedirect("ApuestaServlet?action=lista");
         } catch (IOException ex) {
             Logger.getLogger(ApuestaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
