@@ -48,11 +48,30 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/ProyectoFinal">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="MainServlet?action=lista">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
-                        </li>
+                        <c:if test="${sessionScope.nombreUsuario != null}">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
+
+                            <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="TicketsServlet?action=lista">Tickets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="UsuarioServlet?action=lista">Usuarios</a>
+                                </li>
+                            </c:if>
+                            
+
+                        </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
                                                 </li>
@@ -82,8 +101,6 @@
                                     <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
                                 </li>
                             </c:if>
-
-
                         </ul>
                     </span>
                 </div>

@@ -71,7 +71,7 @@ public class UsuarioServlet extends HttpServlet {
             case "eliminar":
                 eliminarUsuario(request, response);
                 break;
-            case "listaDeUsuarios":
+            case "lista":
                 listaDeUsuario(request, response);
                 break;
             default:
@@ -240,22 +240,21 @@ public class UsuarioServlet extends HttpServlet {
         dto.getEntidad().setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
 
         dao.delete(dto);
-        listaDeUsuario(request, response);
+        try {
+            response.sendRedirect("/ProyectoFinal/UsuarioServlet?action=lista");
+        } catch (IOException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void listaDeUsuario(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("prueba33");
         UsuarioDAO dao = new UsuarioDAO();
 
         try {
-            System.out.println("prueba233");
-            System.out.println(dao.readAll());
-            System.out.println("prueba341");
             List lista = dao.readAll();
-            System.out.println("prueba35");
             request.setAttribute("listaDeUsuarios", lista);
             //System.out.println("prueba4");
-            RequestDispatcher vista = request.getRequestDispatcher("Usuarios/listaUsuarios.jsp");
+            RequestDispatcher vista = request.getRequestDispatcher("Usuarios/ListaUsuarios.jsp");
             vista.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
