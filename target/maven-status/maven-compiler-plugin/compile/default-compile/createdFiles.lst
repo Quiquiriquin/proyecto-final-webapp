@@ -1,5 +1,6 @@
 com/ipn/mx/modelo/dao/CategoriaDAO.class
 com/ipn/mx/controlador/web/MainServlet.class
+com/ipn/mx/modelo/entidades/Municipio.class
 com/ipn/mx/modelo/dao/UsuarioDAO.class
 com/ipn/mx/modelo/entidades/Categoria.class
 com/ipn/mx/modelo/dao/ticketApuestaDAO.class
@@ -19,3 +20,4 @@ com/ipn/mx/modelo/entidades/Apuesta.class
 com/ipn/mx/modelo/dto/GraficaDTO.class
 com/ipn/mx/utilerias/HibernateUtil.class
 com/ipn/mx/controlador/web/TicketsServlet.class
+com/ipn/mx/modelo/entidades/Estado.class

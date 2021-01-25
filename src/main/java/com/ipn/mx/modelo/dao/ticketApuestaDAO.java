@@ -103,6 +103,28 @@ public class ticketApuestaDAO {
         return lista;
     }
     
+    public List readAllFromApuesta(int idApuesta) {
+        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = sesion.getTransaction();
+        List lista = new ArrayList();
+        try {
+            transaction.begin();
+            Query q = sesion.createQuery("from ticketApuesta u where u.idApuesta=" + idApuesta + " order by u.idTicket");
+            for (ticketApuesta u : (List<ticketApuesta>) q.list()) {
+                ticketApuestaDTO dto = new ticketApuestaDTO();
+                dto.setEntidad(u);
+                lista.add(dto);
+            }
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+        }
+        return lista;
+    }
+    
     public List readAllUser(int idUser) {
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction transaction = sesion.getTransaction();

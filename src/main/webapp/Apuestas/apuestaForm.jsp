@@ -64,7 +64,7 @@
                                 <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
                             </li>
                         </c:if>
                         <!--                        <li class="nav-item">
@@ -214,7 +214,7 @@
                                 <div class="mb-2">
                                     <c:if test="${dto.entidad.idCategoria == null}">
                                         <label class="form-label mini">
-                                            Fecha
+                                            Categoría
                                         </label>
                                         <select
                                             class="form-select"

@@ -34,9 +34,12 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="MainServlet?action=lista">Inicio</a>
                         </li>
                         <c:if test="${sessionScope.nombreUsuario != null}">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
 
                             <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
                                 <li class="nav-item">
@@ -45,13 +48,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
+                                </li>
                             </c:if>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
-                            </li>
+                            
+
                         </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
@@ -89,7 +91,7 @@
         </nav>
         <div class="container-fluid mt-3 min-full">
             <div class="mb-3">
-                <a href="/ProyectoFinal"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
+                <a href="/ProyectoFinal/MainServlet?action=lista"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
             </div>
             <div class="row gx-4">
                 <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">

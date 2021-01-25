@@ -8,6 +8,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
+<%@page import="com.ipn.mx.modelo.dto.GraficaDTO"%>
+<%@page import="com.ipn.mx.modelo.dao.GraficaDAO"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +22,46 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="./assets/Styles.css" rel="stylesheet">
     </head>
+    <%
+        Gson gsonObj = new Gson();
+        Map<Object, Object> map = null;
+        List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
+        GraficaDAO dao = new GraficaDAO();
+        List datos = dao.grafica();
+        System.out.println(datos);
+        if (datos != null) {
+            for (int i = 0; i < datos.size(); i++) {
+                GraficaDTO dto = (GraficaDTO) datos.get(i);
+                map = new HashMap<Object, Object>();
+                map.put("label", dto.getNombre());
+                map.put("y", dto.getCantidad());
+                list.add(map);
+            }
+        }
+
+        String dataPoints = gsonObj.toJson(list);
+    %>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "light2",
+                animationEnabled: true,
+                title: {
+                    text: "Cantidad de partidos por categoría",
+                },
+                data: [{
+                        type: "pie",
+                        toolTipContent: "<b>{label}</b>: {y}prod.",
+                        indexLabelFontSize: 16,
+                        indexLabel: "{label} - {y} partido.",
+                        dataPoints: <%out.print(dataPoints);%>
+                    }]
+            });
+            chart.render();
+
+        }
+    </script>
     <body>
         <%
             session = request.getSession(false);
@@ -25,6 +70,7 @@
                 response.sendRedirect("UsuarioServlet?action=ingresar");
             }
         %>
+
         <nav class="navbar navbar-expand-lg custom-navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Bet.io</a>
@@ -34,10 +80,12 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="MainServlet?action=lista">Inicio</a>
                         </li>
                         <c:if test="${sessionScope.nombreUsuario != null}">
-
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
                             <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="TicketsServlet?action=lista">Tickets</a>
@@ -45,13 +93,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte de apuestas abiertas</a>
+                                </li>
                             </c:if>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
-                            </li>
+
+
                         </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
@@ -94,7 +141,11 @@
                     <div class="">
                         Visualiza las métricas generales sin entrar a cada sección.
                     </div>
-                    <img class="mt-3" src="grafica.png"/>
+                    <div>
+                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+                    </div>
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div class="row">

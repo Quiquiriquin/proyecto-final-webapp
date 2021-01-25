@@ -32,6 +32,9 @@
                             <a class="nav-link" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
                         </li>
                         <c:if test="${sessionScope.nombreUsuario != null}">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
 
                             <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
                                 <li class="nav-item">
@@ -40,13 +43,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
+                                </li>
                             </c:if>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
-                            </li>
+
                         </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>

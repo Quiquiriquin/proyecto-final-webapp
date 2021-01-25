@@ -27,8 +27,25 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
                         </li>
+                        <c:if test="${sessionScope.nombreUsuario != null}">
+
+                            <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="TicketsServlet?action=lista">Tickets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
+                                </li>
+                            </c:if>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
+                            </li>
+                        </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
                                                 </li>
@@ -38,13 +55,26 @@
                     </ul>
                     <span class="navbar-text">
                         <ul class="navbar-nav mb-lg-0">
-                            <li>
-                                <a class="nav-link active" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
-                            </li>
+                            <c:if test="${sessionScope.nombreUsuario != null}">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <c:out value="${sessionScope.nombreUsuario}"></c:out>
+                                        </a>
+                                        <ul class="dropdown-menu" style="left: -45px" aria-labelledby="navbarDropdownMenuLink">
+                                            <li><a class="dropdown-item" href="UsuarioServlet?action=perfil">Perfil</a></li>
+                                            <li><a class="dropdown-item" href="UsuarioServlet?action=logout">Cerrar sesión</a></li>
+                                        </ul>
+                                    </li>
+                            </c:if>
 
+                            <c:if test="${sessionScope.nombreUsuario == null}">
+                                <li>
+                                    <a class="nav-link" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=ingresar">Iniciar sesión</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link active" aria-current="page" href="/ProyectoFinal/UsuarioServlet?action=registrar">Registrarme</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </span>
                 </div>
@@ -92,7 +122,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <div class="row gx-2">
                                 <div class="col-lg-6 col-sm-12">
                                     <label
@@ -126,6 +156,8 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        -->
 
                         <div class="mb-3">
                             <label
@@ -139,7 +171,7 @@
                                 id="nombreUsuario"
                                 name="nombreUsuario"
                                 aria-describedby="emailHelp"
-                                placeholder="juan@gmail.com"
+                                placeholder=""
                                 >
                         </div>
 

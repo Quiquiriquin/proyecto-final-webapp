@@ -45,7 +45,7 @@
                                 <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
                             </li>
                         </c:if>
                         <!--                        <li class="nav-item">
@@ -150,7 +150,7 @@
                                         value="<c:out value="${dto.entidad.descripcionCategoria}" />"
                                         >
                                 </div>
-                                
+
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <a href="CategoriaServlet?action=lista">

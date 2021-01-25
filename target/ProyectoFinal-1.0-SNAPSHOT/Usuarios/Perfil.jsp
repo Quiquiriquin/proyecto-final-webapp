@@ -31,7 +31,9 @@
                             <a class="nav-link" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
                         </li>
                         <c:if test="${sessionScope.nombreUsuario != null}">
-
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
                             <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="TicketsServlet?action=lista">Tickets</a>
@@ -39,13 +41,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
+                                </li>
                             </c:if>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
-                            </li>
+
+
                         </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
@@ -83,7 +84,7 @@
         </nav>
         <div class="container mt-3">
             <div class="mb-3">
-                <a href="/ProyectoFinal"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
+                <a href="/ProyectoFinal/MainServlet?action=lista"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
             </div>
             <div>
                 <div class="w-50 mx-auto">
@@ -132,40 +133,6 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <div class="row gx-2">
-                                    <div class="col-lg-6 col-sm-12">
-                                        <label
-                                            for="exampleInputEmail1"
-                                            class="form-label">
-                                            Estado
-                                        </label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="estado"
-                                            name="estado"
-                                            aria-describedby="emailHelp"
-                                            placeholder=""
-                                            >
-                                    </div>
-                                    <div class="col-lg-6 col-sm-12">
-                                        <label
-                                            for="exampleInputEmail1"
-                                            class="form-label">
-                                            Municipio
-                                        </label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="estado"
-                                            name="municipio"
-                                            aria-describedby="emailHelp"
-                                            placeholder=""
-                                            >
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="mb-3">
                                 <label

@@ -39,7 +39,7 @@
                                 <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
                             </li>
                         </c:if>
                         <!--                        <li class="nav-item">

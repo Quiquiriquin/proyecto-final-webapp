@@ -207,6 +207,8 @@ public class ApuestaServlet extends HttpServlet {
     private void almacenarApuesta(HttpServletRequest request, HttpServletResponse response) {
         ApuestaDAO dao = new ApuestaDAO();
         ApuestaDTO dto = new ApuestaDTO();
+        ticketApuestaDAO daoTicket = new ticketApuestaDAO();
+        ticketApuestaDTO dtoTicket = new ticketApuestaDTO();
         
         if (request.getParameter("idApuesta") == null || request.getParameter("idApuesta").isEmpty()) {
             dto.getEntidad().setNombreApuesta(request.getParameter("nombreApuesta"));
@@ -232,6 +234,20 @@ public class ApuestaServlet extends HttpServlet {
             dto.getEntidad().setEquipo2(request.getParameter("equipo2"));
             dto.getEntidad().setMomio(Float.parseFloat(request.getParameter("momio")));
             dto.getEntidad().setGanador(request.getParameter("ganador"));
+            if (dto.getEntidad().getGanador() != null) {
+                List aux = daoTicket.readAllFromApuesta(dto.getEntidad().getIdApuesta());
+                for (int i = 0; i < aux.size(); i++ ) {
+                    dtoTicket = (ticketApuestaDTO) aux.get(i);
+                    if (dtoTicket.getEntidad().getGanador().equals(dto.getEntidad().getGanador()) && dtoTicket.getEntidad().getDeterminada() != "CERRADA") {
+                      dtoTicket.getEntidad().setDeterminada("GANADA");  
+                    }
+                    if (!dtoTicket.getEntidad().getGanador().equals(dto.getEntidad().getGanador()) && dtoTicket.getEntidad().getDeterminada() != "CERRADA"){
+                       dtoTicket.getEntidad().setDeterminada("PERDIDA");   
+                    }
+                    daoTicket.update(dtoTicket);
+                    
+                }
+            }
             dao.update(dto);
             try {
                 response.sendRedirect("ApuestaServlet?action=lista");

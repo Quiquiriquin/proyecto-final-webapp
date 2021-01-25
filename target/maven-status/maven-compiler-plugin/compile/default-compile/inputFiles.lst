@@ -8,6 +8,7 @@
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dto/GraficaDTO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/controlador/web/UsuarioServlet.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/CategoriaDAO.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/entidades/Municipio.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/ticketApuestaDAO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/utilerias/HibernateUtil.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/controlador/web/CategoriaServlet.java
@@ -18,4 +19,5 @@
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/controlador/web/MainServlet.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/dao/UsuarioDAO.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/controlador/web/ApuestaServlet.java
+/Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/modelo/entidades/Estado.java
 /Users/enrique/NetBeansProjects/ProyectoFinal/src/main/java/com/ipn/mx/utilerias/LoginManager.java

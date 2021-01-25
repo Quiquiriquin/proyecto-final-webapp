@@ -37,7 +37,9 @@
                             <a class="nav-link" aria-current="page" href="ApuestaServlet?action=graficar">Inicio</a>
                         </li>
                         <c:if test="${sessionScope.nombreUsuario != null}">
-
+<li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
+                            </li>
                             <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="TicketsServlet?action=lista">Tickets</a>
@@ -45,13 +47,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="CategoriaServlet?action=lista">Categorías</a>
                                 </li>
+                                <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">Reporte apuestas abiertas</a>
+                            </li>
                             </c:if>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=lista">Apuestas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="ApuestaServlet?action=verPDF">verPDF</a>
-                            </li>
+                            
+                            
                         </c:if>
                         <!--                        <li class="nav-item">
                                                     <a class="nav-link" href="#">Features</a>
@@ -90,7 +91,7 @@
 
         <div class="container-fluid mt-3 min-full">
             <div class="mb-3">
-                <a href="/ProyectoFinal"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
+                <a href="/ProyectoFinal/MainServlet?action=lista"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</a>
             </div>
             <div class="row gx-4">
                 <c:if test="${sessionScope.tipoUsuario == 'ADMIN'}">
@@ -113,7 +114,7 @@
                         </div>
                         <div class="row gx-4">
                             <c:forEach var="ticket" items="${tickets}">
-                                <div class="col-lg-3 col-sm-12">
+                                <div class="col-lg-3">
                                     <div class="ticket-container">
                                         <c:if test="${ticket.entidad.determinada != 'GANADA'}">
                                             <div class="ticket-header d-flex justify-content-between">
@@ -166,14 +167,12 @@
                                                 </c:if>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
-                            </c:forEach>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
                 </div>
-
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
